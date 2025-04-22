@@ -9,6 +9,7 @@
     "xlsx": "^0.18.5"
   },
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build": "npm install"
   }
 }
