@@ -60,7 +60,11 @@ const PanelDashboard = () => {
         try {
             const response = await axios.get(
                 `http://localhost:4000/api/v1/panelist/getCriteria/${teamId}`,
-                { withCredentials: true }
+                { withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Add Bearer token
+                    }
+                 }
             );
 
             if (response.data.success) {
@@ -112,7 +116,11 @@ const PanelDashboard = () => {
                     teamId: selectedTeam._id,
                     scores: scoreArray
                 },
-                { withCredentials: true }
+                { withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Add Bearer token
+                    }
+                 }
             );
 
             if (response.data.success) {
@@ -136,169 +144,7 @@ const PanelDashboard = () => {
         toast.success('Logged out successfully');
     };
 
-    // const ScoreModal = () => (
-    //     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-    //         <div className="bg-neutral-900 rounded-lg p-6 w-full max-w-2xl border border-blue-500/20">
-    //             <div className="flex justify-between items-center mb-6">
-    //                 <h3 className="text-xl font-semibold text-white">
-    //                     Score Team: {selectedTeam?.teamName}
-    //                 </h3>
-    //                 <button
-    //                     onClick={() => {
-    //                         setShowScoreModal(false);
-    //                         setSelectedTeam(null);
-    //                     }}
-    //                     className="text-gray-400 hover:text-white"
-    //                 >
-    //                     <X className="w-6 h-6" />
-    //                 </button>
-    //             </div>
-
-    //             <div className="space-y-4 max-h-96 overflow-y-auto">
-    //                 {scoringCriteria.map((criteria) => (
-    //                     <div 
-    //                         key={criteria._id} 
-    //                         className="bg-neutral-800 p-4 rounded-lg border border-blue-500/10"
-    //                     >
-    //                         <div className="flex justify-between items-center mb-2">
-    //                             <h4 className="text-white font-medium">{criteria.criteria}</h4>
-    //                             <span className="text-sm text-blue-400">
-    //                                 Max Points: {criteria.maxPoints}
-    //                             </span>
-    //                         </div>
-    //                         <input
-    //                             type="number"
-    //                             value={scores[criteria._id] ?? ''}
-    //                             onChange={(e) => {
-    //                                 const value = e.target.value;
-    //                                 // Allow empty input or numeric values
-    //                                 if (value === '' || (!isNaN(value) && value >= 0 && value <= criteria.maxPoints)) {
-    //                                     handleScoreChange(criteria._id, value === '' ? '' : Number(value), criteria.maxPoints);
-    //                                 }
-    //                             }}
-    //                             onBlur={(e) => {
-    //                                 // If empty, default to 0
-    //                                 if (e.target.value === '') {
-    //                                     handleScoreChange(criteria._id, 0, criteria.maxPoints);
-    //                                 }
-    //                             }}
-    //                             min="0"
-    //                             max={criteria.maxPoints}
-    //                             className="w-full px-4 py-2 rounded-lg bg-neutral-700 border border-blue-500/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-    //                             placeholder="Enter score"
-    //                         />
-    //                     </div>
-    //                 ))}
-    //             </div>
-
-    //             <div className="mt-6 flex justify-end space-x-3">
-    //                 <button
-    //                     onClick={() => {
-    //                         setShowScoreModal(false);
-    //                         setSelectedTeam(null);
-    //                     }}
-    //                     className="px-4 py-2 rounded-lg bg-neutral-800 text-white hover:bg-neutral-700 transition-colors"
-    //                 >
-    //                     Cancel
-    //                 </button>
-    //                 <button
-    //                     onClick={handleSubmitScores}
-    //                     disabled={submitting}
-    //                     className={`px-4 py-2 rounded-lg font-medium transition-colors flex items-center space-x-2 ${
-    //                         submitting
-    //                             ? 'bg-gray-600 cursor-not-allowed'
-    //                             : 'bg-blue-600 hover:bg-blue-700'
-    //                     }`}
-    //                 >
-    //                     {submitting ? (
-    //                         <>
-    //                             <Loader2 className="w-5 h-5 animate-spin" />
-    //                             <span>Submitting...</span>
-    //                         </>
-    //                     ) : (
-    //                         <>
-    //                             <CheckCircle2 className="w-5 h-5" />
-    //                             <span>Submit Scores</span>
-    //                         </>
-    //                     )}
-    //                 </button>
-    //             </div>
-    //         </div>
-    //     </div>
-    // );
-
-    // return (
-    //     <div className="min-h-screen bg-neutral-900">
-    //         <Toaster position="top-center" />
-
-    //         {/* Header */}
-    //         <header className="bg-neutral-800 border-b border-blue-500/20 py-6">
-    //             <div className="container mx-auto px-4">
-    //                 <div className="flex items-center justify-between">
-    //                     <div className="flex items-center space-x-3">
-    //                         <Award className="w-8 h-8 text-blue-500" />
-    //                         <h1 className="text-2xl font-bold text-white">Panel Dashboard</h1>
-    //                     </div>
-    //                     <button
-    //                         onClick={handleLogout}
-    //                         className="flex items-center space-x-2 px-4 py-2 bg-red-600 hover:bg-red-700 transition-colors rounded-lg text-white"
-    //                     >
-    //                         <LogOut className="w-5 h-5" />
-    //                         <span>Logout</span>
-    //                     </button>
-    //                 </div>
-    //             </div>
-    //         </header>
-
-    //         {/* Main Content */}
-    //         <main className="container mx-auto px-4 py-8">
-    //             <div className="bg-neutral-800 rounded-lg border border-blue-500/20 p-6">
-    //                 <div className="flex items-center space-x-2 mb-6">
-    //                     <Users className="w-6 h-6 text-blue-500" />
-    //                     <h2 className="text-xl font-semibold text-white">Assigned Teams</h2>
-    //                 </div>
-
-    //                 {loading ? (
-    //                     <div className="flex justify-center py-12">
-    //                         <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-    //                     </div>
-    //                 ) : teams.length > 0 ? (
-    //                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    //                         {teams.map((team) => (
-    //                             <div
-    //                                 key={team._id}
-    //                                 onClick={() => handleTeamClick(team)}
-    //                                 className="bg-neutral-700 rounded-lg p-4 cursor-pointer hover:bg-neutral-600 transition-all transform hover:scale-[1.02] border border-blue-500/10"
-    //                             >
-    //                                 <div className="flex items-center justify-between mb-3">
-    //                                     <h3 className="text-lg font-medium text-white">
-    //                                         {team.teamName}
-    //                                     </h3>
-    //                                     <Star className="w-5 h-5 text-blue-500" />
-    //                                 </div>
-    //                                 <p className="text-sm text-gray-300">
-    //                                     {team.participants?.length || 0} Members
-    //                                 </p>
-    //                                 {team.scoringCriteria?.some(c => c.receivedPoints) && (
-    //                                     <p className="text-sm text-blue-400 mt-2">
-    //                                         Scored
-    //                                     </p>
-    //                                 )}
-    //                             </div>
-    //                         ))}
-    //                     </div>
-    //                 ) : (
-    //                     <div className="text-center py-12">
-    //                         <Users className="w-12 h-12 text-gray-500 mx-auto mb-3" />
-    //                         <p className="text-gray-400">No teams assigned yet</p>
-    //                     </div>
-    //                 )}
-    //             </div>
-    //         </main>
-
-    //         {showScoreModal && <ScoreModal />}
-    //     </div>
-    // );
+    
     const ScoreModal = () => (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
             <div className="bg-gradient-to-b from-neutral-800 to-neutral-900 rounded-xl p-8 w-full max-w-2xl border border-blue-500/30 shadow-2xl shadow-blue-500/10">
@@ -433,91 +279,6 @@ const PanelDashboard = () => {
         </div>
     );
 
-    // return (
-    //     <div className="min-h-screen bg-gradient-to-b from-neutral-900 to-black">
-    //         <Toaster position="top-center" />
-
-    //         {/* Header */}
-    //         <header className="bg-gradient-to-r from-neutral-800 to-neutral-900 border-b border-blue-500/30 py-6 sticky top-0 z-10 shadow-lg shadow-black/50">
-    //             <div className="container mx-auto px-6">
-    //                 <div className="flex items-center justify-between">
-    //                     <div className="flex items-center space-x-4">
-    //                         <div className="bg-blue-500/20 p-3 rounded-lg">
-    //                             <Award className="w-6 h-6 text-blue-400" />
-    //                         </div>
-    //                         <h1 className="text-2xl font-bold text-white">Panel Dashboard</h1>
-    //                     </div>
-    //                     <button
-    //                         onClick={handleLogout}
-    //                         className="flex items-center space-x-2 px-5 py-2.5 bg-gradient-to-r from-red-600 to-red-500 hover:from-red-500 hover:to-red-400 transition-all rounded-lg text-white font-medium shadow-lg shadow-red-900/20 transform hover:-translate-y-0.5"
-    //                     >
-    //                         <LogOut className="w-4 h-4" />
-    //                         <span>Logout</span>
-    //                     </button>
-    //                 </div>
-    //             </div>
-    //         </header>
-
-    //         {/* Main Content */}
-    //         <main className="container mx-auto px-6 py-10">
-    //             <div className="bg-gradient-to-b from-neutral-800 to-neutral-900 rounded-xl border border-blue-500/30 p-8 shadow-xl">
-    //                 <div className="flex items-center space-x-3 mb-8">
-    //                     <div className="bg-blue-600/20 p-2.5 rounded-lg">
-    //                         <Users className="w-5 h-5 text-blue-400" />
-    //                     </div>
-    //                     <h2 className="text-2xl font-bold text-white">Assigned Teams</h2>
-    //                 </div>
-
-    //                 {loading ? (
-    //                     <div className="flex flex-col items-center justify-center py-20">
-    //                         <Loader2 className="w-12 h-12 text-blue-500 animate-spin mb-4" />
-    //                         <p className="text-blue-300">Loading teams...</p>
-    //                     </div>
-    //                 ) : teams.length > 0 ? (
-    //                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    //                         {teams.map((team) => (
-    //                             <div
-    //                                 key={team._id}
-    //                                 onClick={() => handleTeamClick(team)}
-    //                                 className="bg-gradient-to-br from-neutral-700 to-neutral-800 rounded-xl p-6 cursor-pointer hover:bg-neutral-600 transition-all transform hover:scale-[1.03] border border-blue-500/20 hover:border-blue-500/50 shadow-lg hover:shadow-blue-500/5 group"
-    //                             >
-    //                                 <div className="flex items-center justify-between mb-4">
-    //                                     <h3 className="text-xl font-semibold text-white group-hover:text-blue-200 transition-colors">
-    //                                         {team.teamName}
-    //                                     </h3>
-    //                                     <div className="bg-blue-500/20 p-2 rounded-full group-hover:bg-blue-500/40 transition-all">
-    //                                         <Star className="w-5 h-5 text-blue-400" />
-    //                                     </div>
-    //                                 </div>
-    //                                 <div className="flex justify-between items-end">
-    //                                     <div className="flex items-center space-x-2 text-sm text-gray-300">
-    //                                         <Users className="w-4 h-4" />
-    //                                         <span>{team.participants?.length || 0} Members</span>
-    //                                     </div>
-    //                                     {team.scoringCriteria?.some(c => c.receivedPoints) && (
-    //                                         <span className="text-sm bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full font-medium">
-    //                                             Scored
-    //                                         </span>
-    //                                     )}
-    //                                 </div>
-    //                             </div>
-    //                         ))}
-    //                     </div>
-    //                 ) : (
-    //                     <div className="flex flex-col items-center justify-center py-20 bg-neutral-800/50 rounded-xl border border-dashed border-neutral-700">
-    //                         <div className="bg-neutral-700/50 p-4 rounded-full mb-4">
-    //                             <Users className="w-10 h-10 text-gray-400" />
-    //                         </div>
-    //                         <p className="text-gray-400 text-lg mb-2">No teams assigned yet</p>
-    //                         <p className="text-gray-500 text-sm max-w-md text-center">When teams are assigned to you for scoring, they will appear here</p>
-    //                     </div>
-    //                 )}
-    //             </div>
-    //         </main>
-
-    //         {showScoreModal && <ScoreModal />}
-    //     </div>
-    // );
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#0a1128] to-[#050a17]">
             <Toaster position="top-center" />
