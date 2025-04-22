@@ -35,7 +35,7 @@ const PanelDashboard = () => {
         try {
             setLoading(true);
             const response = await axios.get(
-                `http://localhost:4000/api/v1/panelist/getTeamList/${panelistId}`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/v1/panelist/getTeamList/${panelistId}`,
                 { withCredentials: true,
                     headers: {
                         'Authorization': `Bearer ${token}` // Add Bearer token
@@ -59,7 +59,7 @@ const PanelDashboard = () => {
     const fetchTeamCriteria = async (teamId) => {
         try {
             const response = await axios.get(
-                `http://localhost:4000/api/v1/panelist/getCriteria/${teamId}`,
+                `${import.meta.env.VITE_API_BASE_URL}/api/v1/panelist/getCriteria/${teamId}`,
                 { withCredentials: true,
                     headers: {
                         'Authorization': `Bearer ${token}` // Add Bearer token
@@ -111,7 +111,7 @@ const PanelDashboard = () => {
             const scoreArray = scoringCriteria.map(criteria => scores[criteria._id]);
 
             const response = await axios.post(
-                'http://localhost:4000/api/v1/panelist/updateTeamScore',
+                `${import.meta.env.VITE_API_BASE_URL}/api/v1/panelist/updateTeamScore`,
                 {
                     teamId: selectedTeam._id,
                     scores: scoreArray
