@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { UserPlus, Loader2 } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import useAuthStore from '../../store/authStore';
 
 const CreatePanelist = ({ hackathonId, fetchPanelistList }) => {
+  const {token} = useAuthStore();
+
   const [panelistForm, setPanelistForm] = useState({
     firstName: '',
     lastName: '',
@@ -37,7 +40,11 @@ const CreatePanelist = ({ hackathonId, fetchPanelistList }) => {
           ...panelistForm,
           hackathonId
         },
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {

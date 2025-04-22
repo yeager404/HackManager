@@ -3,8 +3,12 @@ import { Download, Upload, FileSpreadsheet, Loader2, Info, UploadCloud, X } from
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
 import * as XLSX from 'xlsx';
+import useAuthStore from '../../store/authStore';
 
 const ImportParticipants = ({ hackathonId, criteriaList }) => {
+
+  const {token} = useAuthStore();
+
   const [selectedFile, setSelectedFile] = React.useState(null);
   const [uploadLoading, setUploadLoading] = React.useState(false);
 
@@ -47,6 +51,7 @@ const ImportParticipants = ({ hackathonId, criteriaList }) => {
           withCredentials: true,
           headers: {
             'Content-Type': 'multipart/form-data',
+            'Authorization': `Bearer ${token}` 
           },
         }
       );

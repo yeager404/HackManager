@@ -8,7 +8,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-    const { user } = useAuthStore();
+    const { user, token } = useAuthStore(); // Added token from auth store
     const [showModal, setShowModal] = useState(false);
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -24,7 +24,10 @@ const Dashboard = () => {
 
         try {
             const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getHackathonsList/${user._id}`, {
-                credentials: 'include'
+                credentials: 'include',
+                headers: {
+                    'Authorization': `Bearer ${token}` // Add Bearer token
+                }
             });
             const data = await response.json();
 
@@ -51,6 +54,7 @@ const Dashboard = () => {
                 credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}` // Add Bearer token
                 },
                 body: JSON.stringify(formData),
             });
@@ -81,7 +85,10 @@ const Dashboard = () => {
         try {
             const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/deleteHackathon`, {
                 data: { userId: user._id, hackathonId: hackathonId },
-                withCredentials: true
+                withCredentials: true,
+                headers: {
+                    'Authorization': `Bearer ${token}` 
+                }
             });
 
             if (response.data.success) {

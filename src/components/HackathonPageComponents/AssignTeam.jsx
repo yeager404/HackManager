@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Users, Mail, Briefcase, Loader2, X , User, Award, Check} from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import useAuthStore from '../../store/authStore';
 
 const AssignTeam = ({ hackathonId, panelistList, panelistLoading, fetchPanelistList }) => {
   const [showModal, setShowModal] = useState(false);
@@ -10,13 +11,18 @@ const AssignTeam = ({ hackathonId, panelistList, panelistLoading, fetchPanelistL
   const [teamsLoading, setTeamsLoading] = useState(false);
   const [selectedTeams, setSelectedTeams] = useState([]);
   const [assigning, setAssigning] = useState(false);
+  const {token} = useAuthStore();
 
   const fetchTeams = async () => {
     try {
       setTeamsLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getTeams/${hackathonId}`,
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {
@@ -70,7 +76,11 @@ const AssignTeam = ({ hackathonId, panelistList, panelistLoading, fetchPanelistL
           teamID: selectedTeams,
           panelistID: selectedPanelist._id
         },
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {

@@ -16,7 +16,7 @@ import AssignTeam from "../HackathonPageComponents/AssignTeam";
 
 const HackathonPage = () => {
   const { hackathonId } = useParams();
-  const { user } = useAuthStore();
+  const { user, token } = useAuthStore();
   const navigate = useNavigate();
   
   const [hackathon, setHackathon] = useState(null);
@@ -41,7 +41,11 @@ const HackathonPage = () => {
       setCriteriaLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getCriteriaList/${hackathonId}`,
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {
@@ -61,7 +65,11 @@ const HackathonPage = () => {
       setPanelistLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getPanelistList/${hackathonId}`,
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {
@@ -81,7 +89,10 @@ const HackathonPage = () => {
       try {
         setLoading(true);
         const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getHackathon/${hackathonId}`, {
-          withCredentials: true
+          withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` 
+        }
         });
 
         if (response.data.success) {

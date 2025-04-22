@@ -14,7 +14,7 @@ import axios from 'axios';
 import useAuthStore from '../store/authStore';
 
 const PanelDashboard = () => {
-    const { user, logout } = useAuthStore();
+    const { user, token, logout } = useAuthStore();
     // Use the id property instead of _id since that's what we're getting from the backend
     const panelistId = user?.id;
     const [teams, setTeams] = useState([]);
@@ -36,7 +36,12 @@ const PanelDashboard = () => {
             setLoading(true);
             const response = await axios.get(
                 `http://localhost:4000/api/v1/panelist/getTeamList/${panelistId}`,
-                { withCredentials: true }
+                { withCredentials: true,
+                    headers: {
+                        'Authorization': `Bearer ${token}` // Add Bearer token
+                    }
+                 },
+
             );
 
             if (response.data.success) {

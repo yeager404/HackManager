@@ -2,8 +2,11 @@ import React from 'react';
 import { Loader2, Plus, ClipboardList, Trash2, FileText } from 'lucide-react';
 import { toast } from 'react-hot-toast';
 import axios from 'axios';
+import useAuthStore from '../../store/authStore';
 
 const JudgementCriteria = ({ hackathonId, criteriaForm, setCriteriaForm, criteriaList, criteriaLoading, fetchCriteriaList }) => {
+
+  const {token} = useAuthStore();
   const handleCriteriaChange = (e) => {
     const { name, value } = e.target;
     setCriteriaForm(prev => ({
@@ -28,7 +31,11 @@ const JudgementCriteria = ({ hackathonId, criteriaForm, setCriteriaForm, criteri
           maxPoints: criteriaForm.maxPoints,
           hackathonId: hackathonId
         },
-        { withCredentials: true }
+        { withCredentials: true,
+          headers: {
+            'Authorization': `Bearer ${token}` // Add Bearer token
+        }
+         }
       );
 
       if (response.data.success) {
@@ -125,12 +132,12 @@ const JudgementCriteria = ({ hackathonId, criteriaForm, setCriteriaForm, criteri
                         </span>
                       </div>
                     </div>
-                    <button
+                    {/* <button
                       className="text-gray-400 hover:text-red-400 transition-colors"
                       onClick={() => handleDeleteCriteria(criteria._id)}
                     >
                       <Trash2 className="w-5 h-5" />
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               ))}
