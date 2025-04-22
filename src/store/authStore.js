@@ -13,7 +13,12 @@ const useAuthStore = create(
       // Creator Login (email & password)
       creatorLogin: async (email, password) => {
         try {
-          const response = await axios.post("http://localhost:4000/api/v1/auth/creatorLogin", { email, password }, { withCredentials: true });
+          const response = await axios.post(
+            `${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/creatorLogin`,
+            { email, password },
+            { withCredentials: true }
+          );
+          
 
           if (response.data.success) {
             set({
@@ -34,7 +39,7 @@ const useAuthStore = create(
       // Panelist Login (email & hackathonID)
       panelistLogin: async (email, hackathonID) => {
         try {
-          const response = await axios.post("http://localhost:4000/api/v1/auth/panelistLogin", { email, hackathonID }, { withCredentials: true });
+          const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/v1/auth/panelistLogin`, { email, hackathonID }, { withCredentials: true });
 
           if (response.data.success) {
             const panelist = response.data.panelist;

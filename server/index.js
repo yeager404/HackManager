@@ -24,7 +24,7 @@ app.use(express.urlencoded({ extended: true })); // For form-data parsing
 app.use(cookieParser());
 app.use(
 	cors({
-		origin: 'http://localhost:5173',
+		origin: process.env.FRONTEND_URL,
 		credentials: true,
 	})
 );

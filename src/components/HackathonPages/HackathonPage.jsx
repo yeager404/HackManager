@@ -40,7 +40,7 @@ const HackathonPage = () => {
     try {
       setCriteriaLoading(true);
       const response = await axios.get(
-        `http://localhost:4000/api/v1/hackathon/getCriteriaList/${hackathonId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getCriteriaList/${hackathonId}`,
         { withCredentials: true }
       );
 
@@ -60,7 +60,7 @@ const HackathonPage = () => {
     try {
       setPanelistLoading(true);
       const response = await axios.get(
-        `http://localhost:4000/api/v1/hackathon/getPanelistList/${hackathonId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getPanelistList/${hackathonId}`,
         { withCredentials: true }
       );
 
@@ -80,7 +80,7 @@ const HackathonPage = () => {
     const fetchHackathonDetails = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`http://localhost:4000/api/v1/hackathon/getHackathon/${hackathonId}`, {
+        const response = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getHackathon/${hackathonId}`, {
           withCredentials: true
         });
 

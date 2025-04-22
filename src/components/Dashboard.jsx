@@ -23,7 +23,7 @@ const Dashboard = () => {
         }
 
         try {
-            const response = await fetch(`http://localhost:4000/api/v1/hackathon/getHackathonsList/${user._id}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getHackathonsList/${user._id}`, {
                 credentials: 'include'
             });
             const data = await response.json();
@@ -46,7 +46,7 @@ const Dashboard = () => {
 
     const handleCreateEvent = async (formData) => {
         try {
-            const response = await fetch('http://localhost:4000/api/v1/hackathon/createHackathon', {
+            const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/createHackathon`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {
@@ -79,7 +79,7 @@ const Dashboard = () => {
         setDeletingIds(prev => [...prev, hackathonId]);
 
         try {
-            const response = await axios.delete('http://localhost:4000/api/v1/hackathon/deleteHackathon', {
+            const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/deleteHackathon`, {
                 data: { userId: user._id, hackathonId: hackathonId },
                 withCredentials: true
             });
@@ -110,79 +110,6 @@ const Dashboard = () => {
     };
 
     return (
-        // <div>
-        //     <Navbar />
-        //     <div className="text-4xl sm:text-5xl text-center pt-10">
-        //         <h1>Welcome {user?.firstName || 'User'} 👋</h1>
-        //     </div>
-
-        //     <div className="flex items-center my-8">
-        //         <div className="flex-grow border-t border-neutral-600"></div>
-        //         <span className="mx-4 text-lg font-semibold text-white">Create an Event</span>
-        //         <div className="flex-grow border-t border-neutral-600"></div>
-        //     </div>
-
-        //     <div className="flex justify-center mt-10">
-        //         <button
-        //             onClick={() => setShowModal(true)}
-        //             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition mb-10"
-        //         >
-        //             + Add Event
-        //         </button>
-        //     </div>
-
-        //     <div className="flex items-center my-8">
-        //         <div className="flex-grow border-t border-neutral-600"></div>
-        //         <span className="mx-4 text-lg font-semibold text-white">Existing Events</span>
-        //         <div className="flex-grow border-t border-neutral-600"></div>
-        //     </div>
-
-        //     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        //         {loading ? (
-        //             <div className="col-span-full flex justify-center items-center py-12">
-        //                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-        //             </div>
-        //         ) : events.length > 0 ? (
-        //             events.map((event, index) => (
-        //                 <div 
-        //                     key={event._id || index} 
-        //                     className="ml-2 pop-out bg-neutral-800 p-4 rounded-lg shadow relative cursor-pointer hover:bg-neutral-700 transition-colors"
-        //                     onClick={() => navigateToHackathon(event._id)}
-        //                 >
-        //                     <div className="flex justify-between items-start">
-        //                         <div>
-        //                             <h3 className="text-lg font-semibold text-white mb-2">
-        //                                 <span className="text-blue-500">Event Name:</span> {event.hackathonName}
-        //                             </h3>
-        //                             <p className="text-gray-400">
-        //                                 <span className="text-blue-500">Team Size:</span> {event.teamMinSize} - {event.teamMaxSize}
-        //                             </p>
-        //                         </div>
-        //                         <button
-        //                             onClick={(e) => handleDeleteHackathon(event._id, e)}
-        //                             disabled={deletingIds.includes(event._id)}
-        //                             className="text-blue-500 hover:text-blue-400 focus:outline-none transition-colors p-1"
-        //                             title="Delete Hackathon"
-        //                         >
-        //                             {deletingIds.includes(event._id) ? 
-        //                                 <Loader2 className="w-5 h-5 animate-spin" /> : 
-        //                                 <Trash className="w-5 h-5" />
-        //                             }
-        //                         </button>
-        //                     </div>
-        //                 </div>
-        //             ))
-        //         ) : (
-        //             <div className="col-span-full text-center text-gray-500 py-8">
-        //                 No hackathons created yet
-        //             </div>
-        //         )}
-        //     </div>
-
-        //     {showModal && (
-        //         <EventModal setShowModal={setShowModal} onCreateEvent={handleCreateEvent} />
-        //     )}
-        // </div>
         <div className="min-h-screen bg-gradient-to-br from-neutral-900 via-black to-neutral-900 text-white ">
             <Navbar />
 

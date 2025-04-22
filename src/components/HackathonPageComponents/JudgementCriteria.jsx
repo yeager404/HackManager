@@ -22,7 +22,7 @@ const JudgementCriteria = ({ hackathonId, criteriaForm, setCriteriaForm, criteri
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/v1/hackathon/createCriteria/${hackathonId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/createCriteria/${hackathonId}`,
         {
           criteria: criteriaForm.criteria,
           maxPoints: criteriaForm.maxPoints,

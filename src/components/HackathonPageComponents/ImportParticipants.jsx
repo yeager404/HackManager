@@ -41,7 +41,7 @@ const ImportParticipants = ({ hackathonId, criteriaList }) => {
 
     try {
       const response = await axios.post(
-        `http://localhost:4000/api/v1/team/uploadTeams/${hackathonId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/team/uploadTeams/${hackathonId}`,
         formData,
         {
           withCredentials: true,
@@ -66,38 +66,7 @@ const ImportParticipants = ({ hackathonId, criteriaList }) => {
     }
   };
 
-  //   const downloadTemplate = () => {
-  //     const template = `Team Name,Participant 1 Name,Participant 1 Email,Participant 2 Name,Participant 2 Email
-  // Team Alpha,John Doe,john@example.com,Jane Smith,jane@example.com
-  // Team Beta,Alice Johnson,alice@example.com,Bob Wilson,bob@example.com`;
 
-  //     const blob = new Blob([template], { type: 'text/csv' });
-  //     const url = window.URL.createObjectURL(blob);
-  //     const a = document.createElement('a');
-  //     a.href = url;
-  //     a.download = 'team_template.csv';
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //     document.body.removeChild(a);
-  //   };
-
-  //   const downloadTemplate = () => {
-  //     const template = `Team Name\tParticipant 1 Name\tParticipant 1 Email\tParticipant 2 Name\tParticipant 2 Email
-  // Team Alpha\tJohn Doe\tjohn@example.com\tJane Smith\tjane@example.com
-  // Team Beta\tAlice Johnson\talice@example.com\tBob Wilson\tbob@example.com`;
-
-  //     // Use tab-delimited format with .xls extension
-  //     const blob = new Blob([template], { type: 'application/vnd.ms-excel' });
-  //     const url = window.URL.createObjectURL(blob);
-  //     const a = document.createElement('a');
-  //     a.href = url;
-  //     a.download = 'team_template.xls';
-  //     document.body.appendChild(a);
-  //     a.click();
-  //     window.URL.revokeObjectURL(url);
-  //     document.body.removeChild(a);
-  //   };
   const downloadTemplate = () => {
     // Create the workbook
     const wb = XLSX.utils.book_new();

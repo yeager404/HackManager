@@ -15,7 +15,7 @@ const AssignTeam = ({ hackathonId, panelistList, panelistLoading, fetchPanelistL
     try {
       setTeamsLoading(true);
       const response = await axios.get(
-        `http://localhost:4000/api/v1/hackathon/getTeams/${hackathonId}`,
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/getTeams/${hackathonId}`,
         { withCredentials: true }
       );
 
@@ -65,7 +65,7 @@ const AssignTeam = ({ hackathonId, panelistList, panelistLoading, fetchPanelistL
     setAssigning(true);
     try {
       const response = await axios.post(
-        'http://localhost:4000/api/v1/hackathon/assignTeam',
+        `${import.meta.env.VITE_API_BASE_URL}/api/v1/hackathon/assignTeam`,
         {
           teamID: selectedTeams,
           panelistID: selectedPanelist._id
