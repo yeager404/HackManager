@@ -110,7 +110,7 @@ exports.creatorLogin = async (req, res) => {
         const options = {
             httpOnly: true,
             secure: process.env.NODE_ENV !== "development", // false for local, true for prod
-            sameSite: process.env.NODE_ENV !== "development" ? "None" : "Lax",
+            sameSite: "None",
             expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000)
         };
 
