@@ -15,8 +15,8 @@
 
 ## 💪Made By💪
 
-- 👑 **Srijan Pandit**
-- 👨‍🦰 **Dhruv Gadre**
+-  **Srijan Pandit**
+-  **Dhruv Gadre**
 
 ---
 
