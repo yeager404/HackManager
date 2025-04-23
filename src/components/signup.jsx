@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import { UserPlus } from 'lucide-react';
 
@@ -179,7 +179,8 @@ function SignupPage() {
         </form>
 
         <div className="mt-6 text-center text-neutral-400 text-sm">
-          Already have an account? <a href="#login" className="text-blue-400 hover:text-blue-300 font-medium">Log in</a>
+          Already have an account? 
+          <Link to={"/login"} className="text-blue-400 hover:text-blue-300 font-medium">Log in</Link>
         </div>
       </div>
     </div>

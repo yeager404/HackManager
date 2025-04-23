@@ -97,13 +97,13 @@ function LoginPanelist() {
                         </div>
                     </div>
 
-                    <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
+                    {/* <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
                         <label className="flex items-center">
                             <input type="checkbox" className="mr-2 accent-blue-500" />
                             <span>Remember me</span>
                         </label>
                         <a href="#" className="text-blue-500 hover:text-blue-400 transition">Forgot ID?</a>
-                    </div>
+                    </div> */}
 
                     <button
                         type="submit"
@@ -123,9 +123,9 @@ function LoginPanelist() {
                 </form>
 
                 <div className="mt-6 pt-4 border-t border-neutral-800">
-                    <p className="text-center text-gray-400 text-sm">
+                    {/* <p className="text-center text-gray-400 text-sm">
                         Don't have an account? <a href="#" className="text-blue-500 hover:text-blue-400 transition">Register with your host</a>
-                    </p>
+                    </p> */}
                     <p className="text-center text-gray-400 text-sm mt-3">
                         Login for
                         <Link to="/login" className="text-blue-500 hover:text-blue-400 transition ml-1">Hosts</Link>

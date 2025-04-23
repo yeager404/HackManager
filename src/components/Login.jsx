@@ -85,13 +85,13 @@ function Login() {
             </div>
           </div>
 
-          <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
+          {/* <div className="flex justify-between items-center text-gray-400 text-sm mb-6">
             <label className="flex items-center">
               <input type="checkbox" className="mr-2 accent-blue-500" />
               <span>Remember me</span>
             </label>
             <a href="#" className="text-blue-500 hover:text-blue-400 transition">Forgot password?</a>
-          </div>
+          </div> */}
 
           <button
             type="submit"
@@ -103,7 +103,8 @@ function Login() {
 
         <div className="mt-6 pt-4 border-t border-neutral-800">
           <p className="text-center text-gray-400 text-sm">
-            Don't have an account? <a href="#signup" className="text-blue-500 hover:text-blue-400 transition">Register</a>
+            Don't have an account? 
+            <Link to={"/signup"} className="text-blue-500 hover:text-blue-400 transition">Register</Link>
           </p>
           <p className="text-center text-gray-400 text-sm mt-3">
             Login for
