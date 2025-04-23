@@ -25,6 +25,9 @@ const Navbar = () => {
             <Toaster position="top-center" />
             <div className="container px-4 mx-auto relative">
                 <div className="flex justify-between items-center">
+            
+                <Link to={"/"}  >
+
                     {/* Logo/Brand */}
                     <div className="flex items-center flex-shrink-0">
                         <img className="h-9 w-9 mr-3" src={logo} alt="Logo" />
@@ -32,6 +35,7 @@ const Navbar = () => {
                             HackManager
                         </span>
                     </div>
+                </Link>
 
                     {/* Desktop Navigation */}
                     <ul className="hidden lg:flex ml-14 space-x-10">
