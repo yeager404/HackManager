@@ -2,6 +2,7 @@ import React from 'react';
 import video1 from "../assets/video1.mp4";
 import video2 from "../assets/video2.mp4";
 import ParticlesComponent from './animations/particles.jsx';
+import { Link } from 'react-router-dom';
 
 const HeroSection = () => {
     return (
@@ -20,17 +21,19 @@ const HeroSection = () => {
                     </span>
                 </h1>
                 <p className='mt-10 text-lg text-neutral-400 max-w-4xl'>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci consequuntur quidem facilis odit modi doloribus deserunt fugiat.
+                Designed to simplify the process of organizing and judging hackathons. It offers dedicated portals for Hackathon Creators and Panelists, allowing seamless setup and real-time scoring.
                 </p>
 
                 {/* Button */}
-                <div className="flex justify-center my-10">
-                    <button className="pop-out relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                        <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-neutral-900 rounded-md group-hover:bg-transparent">
-                            Start for free
-                        </span>
-                    </button>
-                </div>
+                <Link to={"/signup"}>
+                    <div className="flex justify-center my-10">
+                        <button className="pop-out relative inline-flex items-center justify-center p-0.5 overflow-hidden text-sm font-medium text-gray-900 rounded-lg bg-gradient-to-br from-blue-500 to-blue-800 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                            <span className="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-neutral-900 rounded-md group-hover:bg-transparent">
+                                Start for free
+                            </span>
+                        </button>
+                    </div>
+                </Link>
 
                 {/* Videos */}
                 {/* <div className='flex mt-10 justify-center'>
